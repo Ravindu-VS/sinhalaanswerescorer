@@ -419,7 +419,7 @@ with st.sidebar:
     # Clear answer and results when question changes
     if st.session_state.prev_question != selected_qid:
         st.session_state.prev_question = selected_qid
-        st.session_state["answer_input"] = "" # Directly clear the widget key
+        st.session_state.answer_input = ""
         st.session_state.grading_result = None
 
     st.markdown("---")
@@ -494,6 +494,7 @@ if guide:
                 "📚 Retrieval Agent: Searching knowledge base...",
                 "🧠 Ontology Agent: Analyzing concepts...",
                 "⚖️ Scoring Agent: Evaluating with LLM...",
+                "✅ Validation Agent: Cross-checking scores...",
                 "📝 Assembling final results..."
             ], 1):
                 step_placeholders[i] = st.empty()
@@ -593,6 +594,22 @@ if guide:
 
         # Expandable sections for evidence
         st.markdown("### 🔍 සාක්ෂි සහ සන්දර්භය (Evidence & Context)")
+
+        # Validation Report
+        with st.expander("✅ Validation Report (Consistency Checks)", expanded=False):
+            val_report = result.get("validation_report", {})
+            if val_report and val_report.get("checks"):
+                col_a, col_b, col_c = st.columns(3)
+                col_a.metric("Passed", f"{val_report.get('passed', 0)}/{val_report.get('total_checks', 0)}")
+                col_b.metric("Warnings", str(val_report.get("warnings", 0)))
+                col_c.metric("Corrected", str(val_report.get("corrected", 0)))
+
+                for check in val_report.get("checks", []):
+                    status = check.get("status", "")
+                    icon = "✅" if status == "pass" else ("⚠️" if status == "warning" else "🔧")
+                    st.markdown(f"{icon} **{check.get('check', '')}**: {check.get('detail', '')}")
+            else:
+                st.info("Validation data not available.")
 
         # Ontology Coverage
         with st.expander("🧠 Ontology Concept Coverage", expanded=False):

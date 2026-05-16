@@ -32,10 +32,12 @@ class OrchestratorAgent:
         from agents.retrieval_agent import RetrievalAgent
         from agents.ontology_agent import OntologyAgent
         from agents.scoring_agent import ScoringAgent
+        from agents.validation_agent import ValidationAgent
 
         self.retrieval_agent = RetrievalAgent()
         self.ontology_agent = OntologyAgent()
         self.scoring_agent = ScoringAgent()
+        self.validation_agent = ValidationAgent()
 
     def grade_answer(self, question_id, question_text, student_answer,
                      progress_callback=None):
@@ -120,8 +122,20 @@ class OrchestratorAgent:
             }
             log_step(3, f"⚠️ Scoring failed: {str(e)}")
 
-        # ========== STEP 4: Assemble Final Result ==========
-        log_step(4, "📝 Assembling final results...")
+        # ========== STEP 4: Validation Agent ==========
+        log_step(4, "✅ Validation Agent: Cross-checking scores...")
+        try:
+            validation_result = self.validation_agent.validate(
+                scoring_result, ontology_result, question_id
+            )
+            log_step(4, f"✅ Validation: {validation_result['passed']}/{validation_result['total_checks']} checks passed"
+                        f"{', ' + str(validation_result['corrected']) + ' corrected' if validation_result['corrected'] else ''}")
+        except Exception as e:
+            validation_result = {"status": "error", "checks": [], "corrections_made": False}
+            log_step(4, f"⚠️ Validation failed: {str(e)}")
+
+        # ========== STEP 5: Assemble Final Result ==========
+        log_step(5, "📝 Assembling final results...")
         elapsed = time.time() - start_time
 
         final_result = {
@@ -140,13 +154,16 @@ class OrchestratorAgent:
             "retrieved_documents": retrieval_result.get("retrieved_documents", []),
             "ontology_coverage": ontology_result.get("coverage_report", {}),
 
+            # Validation
+            "validation_report": validation_result,
+
             # Metadata
             "workflow_log": workflow_log,
             "elapsed_seconds": round(elapsed, 2),
             "model_used": self.scoring_agent.model
         }
 
-        log_step(4, f"✅ Complete! Score: {final_result['total_score']}/20 "
+        log_step(5, f"✅ Complete! Score: {final_result['total_score']}/20 "
                      f"(took {elapsed:.1f}s)")
 
         return final_result

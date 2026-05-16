@@ -29,11 +29,10 @@ class ScoringAgent:
             "prompt": prompt,
             "system": system_prompt,
             "stream": False,
-            "format": "json",
             "options": {
                 "temperature": LLM_TEMPERATURE,
                 "num_ctx": LLM_NUM_CTX,
-                "num_predict": 2048,
+                "num_predict": 4096,
             }
         }
 
@@ -98,10 +97,16 @@ IMPORTANT RULES:
 1. You MUST evaluate EACH criterion in the marking guide separately.
 2. You MUST assign a score for each criterion (0 to max_marks for that criterion).
 3. You MUST provide justification in Sinhala for each criterion score.
-4. Use the retrieved context and ontology coverage to verify factual accuracy.
-5. Be fair but rigorous - award marks only for correct, relevant content.
-6. Your response MUST be valid JSON format.
-7. All justifications should be in Sinhala language."""
+4. In each justification, you MUST:
+   a. QUOTE specific phrases from the student's answer that earned marks
+   b. Reference which retrieved context documents support or contradict the student's claims
+   c. Note which ontology concepts from the coverage report were found or missing
+5. Use the retrieved context and ontology coverage to verify factual accuracy.
+6. Be fair but rigorous - award marks only for correct, relevant content.
+7. If a key ontology concept is MISSING from the student's answer, DEDUCT marks and explain why.
+8. If retrieved context CONTRADICTS the student's claim, DEDUCT marks and explain.
+9. Your response MUST be valid JSON format.
+10. All justifications MUST be in Sinhala language."""
 
     def _build_scoring_prompt(self, question, answer, marking_guide,
                                retrieved_context, ontology_coverage,
@@ -144,11 +149,13 @@ Evaluate the student's answer against EACH criterion in the marking guide.
 For each criterion, determine how many marks to award based on:
 1. How well the student's answer covers the criterion requirements
 2. Factual accuracy (verified against the retrieved context)
-3. Concept coverage (verified against the ontology)
+3. Concept coverage (verified against the ontology report above)
 4. Quality and depth of explanation
 
-CRITICAL: Keep all Sinhala justifications VERY SHORT and concise (maximum 1-2 sentences). Do not write long paragraphs.
-CRITICAL: You MUST create exactly one entry in the `criteria_scores` array for EACH and EVERY criterion listed in the "MARKING GUIDE" above. DO NOT invent new criteria. Use the exact `criterion_name` and `max_marks` from the marking guide.
+CRITICAL: For each criterion justification you MUST:
+- Quote specific parts of the student's answer
+- Reference which retrieved context supports or contradicts their claims
+- Note which ontology concepts are present or missing
 
 ## RESPOND IN THIS EXACT JSON FORMAT:
 ```json
@@ -156,10 +163,12 @@ CRITICAL: You MUST create exactly one entry in the `criteria_scores` array for E
     "criteria_scores": [
         {{
             "criterion_number": 1,
-            "criterion_name": "<exact name from marking guide>",
-            "max_marks": <exact max from marking guide>,
+            "criterion_name": "<name>",
+            "max_marks": <max>,
             "awarded_marks": <score>,
-            "justification_si": "<Sinhala justification explaining why marks were awarded/deducted>"
+            "justification_si": "<Sinhala justification with evidence: quote student text, reference retrieved context, note ontology concepts>",
+            "evidence_from_rag": "<Which retrieved document supported/contradicted this criterion>",
+            "ontology_concepts_checked": ["<concept1>", "<concept2>"]
         }},
         ...for each criterion...
     ],
