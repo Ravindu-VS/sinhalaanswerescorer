@@ -32,7 +32,7 @@ class ScoringAgent:
             "options": {
                 "temperature": LLM_TEMPERATURE,
                 "num_ctx": LLM_NUM_CTX,
-                "num_predict": 4096,
+                "num_predict": 1024,
             }
         }
 
@@ -145,6 +145,8 @@ For each criterion, determine how many marks to award based on:
 2. Factual accuracy (verified against the retrieved context)
 3. Concept coverage (verified against the ontology)
 4. Quality and depth of explanation
+
+CRITICAL: Keep all Sinhala justifications VERY SHORT and concise (maximum 1-2 sentences). Do not write long paragraphs.
 
 ## RESPOND IN THIS EXACT JSON FORMAT:
 ```json
