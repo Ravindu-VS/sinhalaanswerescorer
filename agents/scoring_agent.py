@@ -90,8 +90,16 @@ class ScoringAgent:
 
     def _build_system_prompt(self):
         """Build the system prompt for the scoring LLM."""
-        return """You are an expert Sinhala History teacher specializing in the Anuradhapura Period of Sri Lanka. 
+        return """ඔබ අනුරාධපුර කාලය පිළිබඳ විශේෂඥ සිංහල ඉතිහාස ගුරුවරයෙකි.
+You are an expert Sinhala History teacher specializing in the Anuradhapura Period of Sri Lanka.
 Your task is to grade a student's Sinhala open-ended answer based on a marking guide.
+
+CRITICAL LANGUAGE REQUIREMENT:
+- ALL criterion_name values MUST be copied EXACTLY from the marking guide (they are in Sinhala)
+- ALL justification_si values MUST be written ENTIRELY in Sinhala (සිංහල)
+- ALL overall_feedback_si MUST be written ENTIRELY in Sinhala (සිංහල)
+- DO NOT translate criterion names to English
+- DO NOT write justifications in English
 
 IMPORTANT RULES:
 1. You MUST evaluate EACH criterion in the marking guide separately.
@@ -106,20 +114,24 @@ IMPORTANT RULES:
 7. If a key ontology concept is MISSING from the student's answer, DEDUCT marks and explain why.
 8. If retrieved context CONTRADICTS the student's claim, DEDUCT marks and explain.
 9. Your response MUST be valid JSON format.
-10. All justifications MUST be in Sinhala language."""
+10. ALL text output (criterion_name, justification_si, overall_feedback_si) MUST be in සිංහල (Sinhala)."""
 
     def _build_scoring_prompt(self, question, answer, marking_guide,
                                retrieved_context, ontology_coverage,
                                ontology_context, guide):
-        """Build the detailed scoring prompt."""
-        criteria_json = []
+        # Build the JSON example with ACTUAL Sinhala criterion names from the guide
+        criteria_example_lines = []
         for i, c in enumerate(guide["criteria"]):
-            criteria_json.append({
-                "criterion_number": i + 1,
-                "criterion_name": c["name"],
-                "max_marks": c["max_marks"],
-                "description": c["description_si"]
-            })
+            criteria_example_lines.append(f'''        {{
+            "criterion_number": {i + 1},
+            "criterion_name": "{c['name']}",
+            "max_marks": {c['max_marks']},
+            "awarded_marks": "<score 0-{c['max_marks']}>",
+            "justification_si": "<සිංහලෙන් ලකුණු ලබාදීමට/අඩුකිරීමට හේතුව ලියන්න>",
+            "evidence_from_rag": "<Which source document supported this>",
+            "ontology_concepts_checked": ["<concept1>", "<concept2>"]
+        }}''')
+        criteria_example = ",\n".join(criteria_example_lines)
 
         prompt = f"""
 ## TASK: Grade the following Sinhala answer
@@ -157,28 +169,22 @@ CRITICAL: For each criterion justification you MUST:
 - Reference which retrieved context supports or contradicts their claims
 - Note which ontology concepts are present or missing
 
+LANGUAGE: criterion_name must be EXACTLY as shown below (Sinhala). justification_si and overall_feedback_si MUST be in සිංහල.
+
 ## RESPOND IN THIS EXACT JSON FORMAT:
 ```json
 {{
     "criteria_scores": [
-        {{
-            "criterion_number": 1,
-            "criterion_name": "<name>",
-            "max_marks": <max>,
-            "awarded_marks": <score>,
-            "justification_si": "<Sinhala justification with evidence: quote student text, reference retrieved context, note ontology concepts>",
-            "evidence_from_rag": "<Which retrieved document supported/contradicted this criterion>",
-            "ontology_concepts_checked": ["<concept1>", "<concept2>"]
-        }},
-        ...for each criterion...
+{criteria_example}
     ],
     "total_score": <sum of all awarded marks>,
     "total_max": 20,
-    "overall_feedback_si": "<Overall Sinhala feedback about the answer>"
+    "overall_feedback_si": "<සිංහලෙන් සමස්ත ප්‍රතිපෝෂණය ලියන්න>"
 }}
 ```
 
-IMPORTANT: Return ONLY the JSON. No additional text before or after the JSON."""
+IMPORTANT: Return ONLY the JSON. No additional text before or after the JSON.
+සිංහලෙන් පමණක් justification_si සහ overall_feedback_si ලියන්න. ඉංග්‍රීසියෙන් ලියන්න එපා."""
 
         return prompt
 
