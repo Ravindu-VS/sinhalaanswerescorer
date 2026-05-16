@@ -148,6 +148,7 @@ For each criterion, determine how many marks to award based on:
 4. Quality and depth of explanation
 
 CRITICAL: Keep all Sinhala justifications VERY SHORT and concise (maximum 1-2 sentences). Do not write long paragraphs.
+CRITICAL: You MUST create exactly one entry in the `criteria_scores` array for EACH and EVERY criterion listed in the "MARKING GUIDE" above. DO NOT invent new criteria. Use the exact `criterion_name` and `max_marks` from the marking guide.
 
 ## RESPOND IN THIS EXACT JSON FORMAT:
 ```json
@@ -155,8 +156,8 @@ CRITICAL: Keep all Sinhala justifications VERY SHORT and concise (maximum 1-2 se
     "criteria_scores": [
         {{
             "criterion_number": 1,
-            "criterion_name": "<name>",
-            "max_marks": <max>,
+            "criterion_name": "<exact name from marking guide>",
+            "max_marks": <exact max from marking guide>,
             "awarded_marks": <score>,
             "justification_si": "<Sinhala justification explaining why marks were awarded/deducted>"
         }},
