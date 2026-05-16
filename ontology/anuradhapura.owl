@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://sinhala-history.org/anuradhapura.owl"
+         xmlns="http://sinhala-history.org/anuradhapura.owl#">
+
+<owl:Ontology rdf:about="http://sinhala-history.org/anuradhapura.owl"/>
+
+<owl:ObjectProperty rdf:about="#built_by">
+  <rdfs:domain rdf:resource="#Structure"/>
+  <rdfs:range rdf:resource="#Ruler"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#ruled_during">
+  <rdfs:domain rdf:resource="#Ruler"/>
+  <rdfs:range rdf:resource="#TimePeriod"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#located_in">
+  <rdfs:domain rdf:resource="#Structure"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#part_of">
+  <rdfs:domain rdf:resource="#AdministrativeUnit"/>
+  <rdfs:range rdf:resource="#AdministrativeUnit"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#introduced_by">
+  <rdfs:domain rdf:resource="#Religion"/>
+  <rdfs:range rdf:resource="#Ruler"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#associated_with">
+  <rdfs:domain rdf:resource="#HistoricalEntity"/>
+  <rdfs:range rdf:resource="#HistoricalEntity"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#fought_in">
+  <rdfs:domain rdf:resource="#Ruler"/>
+  <rdfs:range rdf:resource="#Battle"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#succeeded_by">
+  <rdfs:domain rdf:resource="#Ruler"/>
+  <rdfs:range rdf:resource="#Ruler"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#founded_by">
+  <rdfs:domain rdf:resource="#MonasticOrder"/>
+  <rdfs:range rdf:resource="#Ruler"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#reign_start">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Ruler"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#reign_end">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Ruler"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#significance_si">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#HistoricalEntity"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#significance_en">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#HistoricalEntity"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#HistoricalEntity">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Ruler">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Location">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Structure">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Event">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TimePeriod">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Religion">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AdministrativeUnit">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tank">
+  <rdfs:subClassOf rdf:resource="#Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Canal">
+  <rdfs:subClassOf rdf:resource="#Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Stupa">
+  <rdfs:subClassOf rdf:resource="#Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Monastery">
+  <rdfs:subClassOf rdf:resource="#Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MonasticOrder">
+  <rdfs:subClassOf rdf:resource="#HistoricalEntity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Battle">
+  <rdfs:subClassOf rdf:resource="#Event"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Invasion">
+  <rdfs:subClassOf rdf:resource="#Event"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#Anuradhapura">
+  <rdf:type rdf:resource="#Location"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අනුරාධපුරය - ශ්‍රී ලංකාවේ පළමු අගනුවර</significance_si>
+  <significance_en rdf:datatype="http://www.w3.org/2001/XMLSchema#string">First capital of Sri Lanka</significance_en>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Polonnaruwa">
+  <rdf:type rdf:resource="#Location"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">පොළොන්නරුව - අනුරාධපුරයෙන් පසු අගනුවර</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Mihintale">
+  <rdf:type rdf:resource="#Location"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මිහින්තලේ - බුදුදහම හඳුන්වාදුන් ස්ථානය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#EarlyPeriod_377BCE_to_100CE">
+  <rdf:type rdf:resource="#TimePeriod"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මුල් කාලය - රාජධානිය ස්ථාපනය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#MiddlePeriod_100CE_to_500CE">
+  <rdf:type rdf:resource="#TimePeriod"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මධ්‍ය කාලය - ජලාශ ශිෂ්ටාචාරය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#LatePeriod_500CE_to_1017CE">
+  <rdf:type rdf:resource="#TimePeriod"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අවසාන කාලය - පරිහානිය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Pandukabhaya">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#EarlyPeriod_377BCE_to_100CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">437 BCE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">367 BCE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">පණ්ඩුකාභය - අනුරාධපුර නිර්මාතෘ</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Devanampiya_Tissa">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#EarlyPeriod_377BCE_to_100CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">247 BCE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">207 BCE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">දේවානම්පිය තිස්ස - බුදුදහම රාජ්‍ය ආගම කළ රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Dutugemunu">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#EarlyPeriod_377BCE_to_100CE"/>
+  <fought_in rdf:resource="#Battle_of_Vijithapura"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">161 BCE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">137 BCE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">දුටුගැමුණු - ලංකාව එක්සේසත් කළ වීර රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Vattagamani_Abhaya">
+  <rdf:type rdf:resource="#Ruler"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">29 BCE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">17 BCE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">වට්ටගාමිණී අභය - අභයගිරිය ස්ථාපකයා</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Vasabha">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#MiddlePeriod_100CE_to_500CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">67 CE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">111 CE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">වසභ - ජලාශ 11ක් හා ඇළ 12ක් ඉදිකළ රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Mahasena">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#MiddlePeriod_100CE_to_500CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">274 CE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">301 CE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මහාසේන - මින්නේරිය වැව හා ජේතවනාරාමය ඉදිකළ රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Dhatusena">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#MiddlePeriod_100CE_to_500CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">455 CE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">473 CE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ධාතුසේන - කලා වැව හා ජය ගඟ ඉදිකළ රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Mahinda_V">
+  <rdf:type rdf:resource="#Ruler"/>
+  <ruled_during rdf:resource="#LatePeriod_500CE_to_1017CE"/>
+  <reign_start rdf:datatype="http://www.w3.org/2001/XMLSchema#string">982 CE</reign_start>
+  <reign_end rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1017 CE</reign_end>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මහින්ද V - අනුරාධපුරයේ අවසාන රජු</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Abhaya_Wewa">
+  <rdf:type rdf:resource="#Tank"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අභය වැව - පළමු ප්‍රධාන ජලාශය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Tissa_Wewa">
+  <rdf:type rdf:resource="#Tank"/>
+  <built_by rdf:resource="#Devanampiya_Tissa"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">තිස්ස වැව</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Nuwara_Wewa">
+  <rdf:type rdf:resource="#Tank"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">නුවර වැව - නගර ජල සම්පාදනය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Kala_Wewa">
+  <rdf:type rdf:resource="#Tank"/>
+  <built_by rdf:resource="#Dhatusena"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">කලා වැව - ධාතුසේන විසින් ඉදිකළ මහා ජලාශය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Minneriya_Wewa">
+  <rdf:type rdf:resource="#Tank"/>
+  <built_by rdf:resource="#Mahasena"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මින්නේරිය වැව - මහාසේන රජු විසින් ඉදිකළ ජලාශය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Jaya_Ganga">
+  <rdf:type rdf:resource="#Canal"/>
+  <built_by rdf:resource="#Dhatusena"/>
+  <associated_with rdf:resource="#Kala_Wewa"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ජය ගඟ (යෝද ඇල) - සැතපුම් 54 දිග ඇළ මාර්ගය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Thuparamaya">
+  <rdf:type rdf:resource="#Stupa"/>
+  <built_by rdf:resource="#Devanampiya_Tissa"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ථූපාරාමය - ශ්‍රී ලංකාවේ පළමු දාගැබ</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Ruwanwelisaya">
+  <rdf:type rdf:resource="#Stupa"/>
+  <built_by rdf:resource="#Dutugemunu"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">රුවන්වැලිසෑය - දුටුගැමුණු රජු ඉදිකළ මහා ස්තූපය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Jetavanarama">
+  <rdf:type rdf:resource="#Stupa"/>
+  <built_by rdf:resource="#Mahasena"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ජේතවනාරාමය - එකල ලෝකයේ තුන්වන උසම ගොඩනැගිල්ල</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Abhayagiri_Stupa">
+  <rdf:type rdf:resource="#Stupa"/>
+  <built_by rdf:resource="#Vattagamani_Abhaya"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අභයගිරි ස්තූපය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Sri_Maha_Bodhi">
+  <rdf:type rdf:resource="#Structure"/>
+  <located_in rdf:resource="#Anuradhapura"/>
+  <associated_with rdf:resource="#Devanampiya_Tissa"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ශ්‍රී මහා බෝධිය - ලෝකයේ පැරණිතම ලේඛනගත රෝපිත වෘක්ෂය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Mahavihara">
+  <rdf:type rdf:resource="#MonasticOrder"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">මහාවිහාරය - ස්ථවිරවාදී බෞද්ධ නිකාය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Abhayagiri_Nikaya">
+  <rdf:type rdf:resource="#MonasticOrder"/>
+  <founded_by rdf:resource="#Vattagamani_Abhaya"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අභයගිරි නිකාය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Jetavana_Nikaya">
+  <rdf:type rdf:resource="#MonasticOrder"/>
+  <founded_by rdf:resource="#Mahasena"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ජේතවන නිකාය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Theravada_Buddhism">
+  <rdf:type rdf:resource="#Religion"/>
+  <introduced_by rdf:resource="#Devanampiya_Tissa"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ථේරවාද බුදුදහම - රාජ්‍ය ආගම</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Battle_of_Vijithapura">
+  <rdf:type rdf:resource="#Battle"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">දුටුගැමුණු-එළාර යුද්ධය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Chola_Invasion_1017">
+  <rdf:type rdf:resource="#Invasion"/>
+  <associated_with rdf:resource="#Mahinda_V"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ක්‍රි.ව. 1017 චෝල ආක්‍රමණය - අනුරාධපුරයේ පරිහානිය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Anuradhapura_Kingdom">
+  <rdf:type rdf:resource="#AdministrativeUnit"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">අනුරාධපුර රාජධානිය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Province_Rata">
+  <rdf:type rdf:resource="#AdministrativeUnit"/>
+  <part_of rdf:resource="#Anuradhapura_Kingdom"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">රට - පළාත් මට්ටමේ පරිපාලන ඒකකය</significance_si>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Village_Gama">
+  <rdf:type rdf:resource="#AdministrativeUnit"/>
+  <part_of rdf:resource="#Province_Rata"/>
+  <significance_si rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ගම - ග්‍රාම මට්ටමේ පරිපාලන ඒකකය</significance_si>
+</owl:NamedIndividual>
+
+
+</rdf:RDF>
