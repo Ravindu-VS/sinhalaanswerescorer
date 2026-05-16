@@ -22,7 +22,7 @@ It combines **RAG (ChromaDB)**, **ontology reasoning (OWLReady2)**, and **LLM-ba
 - LangChain (core/community)
 - ChromaDB
 - sentence-transformers
-- Owlready2
+- owlready2
 - Ollama (`llama3:latest`)
 
 ## Project Structure
