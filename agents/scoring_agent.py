@@ -32,7 +32,7 @@ class ScoringAgent:
             "options": {
                 "temperature": LLM_TEMPERATURE,
                 "num_ctx": LLM_NUM_CTX,
-                "num_predict": 1024,
+                "num_predict": 512,
             }
         }
 
