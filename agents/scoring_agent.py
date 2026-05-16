@@ -29,10 +29,11 @@ class ScoringAgent:
             "prompt": prompt,
             "system": system_prompt,
             "stream": False,
+            "format": "json",
             "options": {
                 "temperature": LLM_TEMPERATURE,
                 "num_ctx": LLM_NUM_CTX,
-                "num_predict": 512,
+                "num_predict": 2048,
             }
         }
 
