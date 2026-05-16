@@ -354,8 +354,6 @@ if "is_grading" not in st.session_state:
     st.session_state.is_grading = False
 if "prev_question" not in st.session_state:
     st.session_state.prev_question = None
-if "answer_text" not in st.session_state:
-    st.session_state.answer_text = ""
 
 
 def get_orchestrator():
@@ -421,7 +419,7 @@ with st.sidebar:
     # Clear answer and results when question changes
     if st.session_state.prev_question != selected_qid:
         st.session_state.prev_question = selected_qid
-        st.session_state.answer_text = ""
+        st.session_state["answer_input"] = "" # Directly clear the widget key
         st.session_state.grading_result = None
 
     st.markdown("---")
@@ -468,12 +466,9 @@ if guide:
         label="Student Answer",
         height=200,
         placeholder="මෙහි ඔබේ සිංහල පිළිතුර ලියන්න...",
-        value=st.session_state.answer_text,
         key="answer_input",
         label_visibility="collapsed"
     )
-    # Keep session state in sync
-    st.session_state.answer_text = student_answer
 
     # Grade button
     col1, col2, col3 = st.columns([1, 2, 1])

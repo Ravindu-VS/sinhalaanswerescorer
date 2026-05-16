@@ -13,7 +13,7 @@ ONTOLOGY_DIR = os.path.join(BASE_DIR, "ontology")
 ONTOLOGY_FILE = os.path.join(ONTOLOGY_DIR, "anuradhapura.owl")
 
 # --- LLM Configuration ---
-OLLAMA_MODEL = "llama3:latest"  # Primary LLM for scoring
+OLLAMA_MODEL = "gemma3:4b"  # Primary LLM for scoring
 OLLAMA_BASE_URL = "http://localhost:11434"
 LLM_TEMPERATURE = 0.1  # Low temperature for consistent scoring
 LLM_NUM_CTX = 4096  # Context window
